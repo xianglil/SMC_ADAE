@@ -7,6 +7,11 @@ Artifact description for the SMC paper.
 * $A_3$: Input and output fils for Exp.\;2: Strong and weak scaling of SMC-GPU.
 * $A_4$: Atom position data for the simulated APT needle specimen.
 
+### Hardwares:
+[H800](./gpu-H800.png)
+
+[NPU](./npu-910B3.png)
+
 ### A_4
 1. Monte Carlo simulation of $\rm{Fe_{29}Co_{29}Ni_{28}Al_{7}Ti_{7}}$ using a one-billion-atom supercell. The results are obtained with Exp. 1. The following GIF file only shows the XY face due to the complete 1 billion atoms is too larger to show. 
 ![Configuration vs MC steps](./lattice0.gif)
@@ -145,21 +150,21 @@ mpirun -n 1 ./ising_basic_3d -x 960 -y 510 -z 525 -n 100 -m 1 -a 2000 -i 2000 -d
 * Number of atoms per GPU: ~ 1B
 
 #### Throughput estimation
-- EPI table1 `log_weak_scaling/FCC_EPI_dist/out_fcc_epi_dist_333_16/out0.dat`
+- [EPI table1](log_weak_scaling/FCC_EPI_dist/out_fcc_epi_dist_333_16/out0.dat)
   - TP `16*960*510*525*4/(31.0069/100)=5.31*10^10`
   - TP per chip `960*510*525*4/(31.0069/100)=3.31*10^9`
 
-- ML table2  `log_weak_scaling/FCC_MLIP_dist/out_fcc_mlip_dist_444_16/out0.dat`
+- [ML table2](log_weak_scaling/FCC_MLIP_dist/out_fcc_mlip_dist_444_16/out0.dat)
   - TP `16*1152*468*468*4/(276.062/10)=5.85*10^8`
   - TP per chip `1152*468*468*4/(276.062/10)=3.66*10^7`
-- ML table2  `log_table2`
+- [ML table2](log_table2)
   - TP `16*1152*468*468*4/(27065.2/1000)=5.97*10^8`
   - TP per chip `1152*468*468*4/(27065.2/1000)=3.72*10^7`
 
-- ML table3 A800  `log_table3`
+- [ML table3 A800](log_table3)
   - TP `1152*468*468*4/(405.802/10)=2.49*10^7`
  
-- ML table4 NPU 910B `log_table4_910B`
+- [ML table4 NPU 910B](log_table4_910B)
   - TP `8*1152*468*468*4/(1302.93/10)=6.20*10^7`
   - TP per chip `1152*468*468*4/(1302.93/10)=7.75*10^6`
 

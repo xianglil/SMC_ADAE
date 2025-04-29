@@ -8,36 +8,37 @@ Artifact description for the SMC paper.
 * $A_4$: Atom position data for the simulated APT needle specimen.
 
 ### A_1
-1. Input:
-   ```bash
+Input:
+```bash
    sbatch -N 2 --gres=gpu:8 --qos=gpugpu ./run_para.sh
-   ```
-   `run_para.sh`:
-   ```bash
+```
+`run_para.sh`:
+```bash
    #!/bin/bash
-  module purge
-  module load openmpi/4.1.5_ucx1.17.0_nvhpc24.9_cuda12.4
-  #make clean
-  make
-  export NCCL_DEBUG=INFO
-  export NCCL_IB_DISABLE=0
-  export NCCL_IB_HCA=mlx5_0:1,mlx5_1:1,mlx5_3:1,mlx5_4:1
-  export NCCL_SOCKET_IFNAME=bond0
-  export NCCL_IB_TIMEOUT=23
-  export NCCL_IB_RETRY_CNT=7
-  export OMPI_MCA_btl_openib_allow_ib=true
-  export OMPI_MCA_btl=openib,self,vader  
-  nvidia-smi | grep NVIDIA
-  (
+   module purge
+   module load openmpi/4.1.5_ucx1.17.0_nvhpc24.9_cuda12.4
+   #make clean
+   make
+   export NCCL_DEBUG=INFO
+   export NCCL_IB_DISABLE=0
+   export NCCL_IB_HCA=mlx5_0:1,mlx5_1:1,mlx5_3:1,mlx5_4:1
+   export NCCL_SOCKET_IFNAME=bond0
+   export NCCL_IB_TIMEOUT=23
+   export NCCL_IB_RETRY_CNT=7
+   export OMPI_MCA_btl_openib_allow_ib=true
+   export OMPI_MCA_btl=openib,self,vader  
+   nvidia-smi | grep NVIDIA
+   (
     for i in {1..1000}
     do
       date
       nvidia-smi | grep MiB
     done
-  ) &
-  mpirun -np 16 -N 8 ./ising_basic_3d -x 84 -y 630 -z 630 -n 100 -m 200 -a 2000 -i 950 -d 100 -o 1
-   ```
-2. Output: See [output files](./log_1B_EPI_billionSteps_GPU/) for details.
+   ) &
+   mpirun -np 16 -N 8 ./ising_basic_3d -x 84 -y 630 -z 630 -n 100 -m 200 -a 2000 -i 950 -d 100 -o 1
+```
+
+Output: See [output files](./log_1B_EPI_billionSteps_GPU/) for details.
 
 ### A_4
 1. Monte Carlo simulation of $\rm{Fe_{29}Co_{29}Ni_{28}Al_{7}Ti_{7}}$ using a one-billion-atom supercell. The results are obtained with Exp. 1. The supercell size is:  The following GIF file only shows the XY face due to the complete 1 billion atoms is too larger to show. 

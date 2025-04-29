@@ -8,9 +8,9 @@ Artifact description for the SMC paper.
 * $A_4$: Atom position data for the simulated APT needle specimen.
 
 ### Hardwares:
-[H800](./gpu-H800.png)
+![H800](./gpu-H800.png)
 
-[NPU](./npu-910B3.png)
+![NPU](./npu-910B3.png)
 
 ### A_4
 1. Monte Carlo simulation of $\rm{Fe_{29}Co_{29}Ni_{28}Al_{7}Ti_{7}}$ using a one-billion-atom supercell. The results are obtained with Exp. 1. The following GIF file only shows the XY face due to the complete 1 billion atoms is too larger to show. 

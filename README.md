@@ -47,6 +47,9 @@ Input:
 ```
 Output: See [output files A2](./log_table4_910B/) for details.
 
+### A_3
+Input and Output: See the results at [Strong Scaling](log_strong_scaling.zip) and [Weak Scaling](log_weak_scaling.zip)
+
 ### A_4
 1. Monte Carlo simulation of $\rm{Fe_{29}Co_{29}Ni_{28}Al_{7}Ti_{7}}$ using a one-billion-atom supercell. The results are obtained with Exp. 1. The supercell size is:  The following GIF file only shows the XY face due to the complete 1 billion atoms is too larger to show. 
 ![Configuration vs MC steps](./lattice0.gif)

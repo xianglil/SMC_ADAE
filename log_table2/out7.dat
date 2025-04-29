@@ -1,0 +1,150 @@
+======================================
+The temperature T = 2000
+======================================
+Starting skip iterations...
+Completed 0 / 1000 skip iterations...
+the initial averaged energy is -380.782 meV
+Starting measure iterations...
+Completed 0 / 100 measure iterations...  energy_ave: -380.799
+MPI cost time = 177.272
+mean energy = -381.666
+variance energy = 0.254036
+the final averaged energy is -381.019
+REPORT:
+	temperature: 2000
+	seed: 1234
+	warmup iterations: 0
+	skip iterations: 1000
+	measure iterations: 100
+	lattice dimensions: 1152 x 468 x 468
+	linked cell: 4 x 4 x 4
+	warmup/skip updates elapsed time: 27065.2 sec
+	warmup/skip updates per ns: 0.03729
+	measure updates elapsed time: 2690.56 sec
+	measure updates per ns: 0.0375113
+	average energy: -381.666
+	cv: 11901.1
+Writing lattice to out2025-3-25-7:59/lattice-T_all2000-7.dat
+Writing energyto out2025-3-25-7:59/energy-T_all2000-7.dat
+======================================
+The temperature T = 1750
+======================================
+Starting skip iterations...
+Completed 0 / 1000 skip iterations...
+the initial averaged energy is -391.226 meV
+Starting measure iterations...
+Completed 0 / 100 measure iterations...  energy_ave: -391.24
+MPI cost time = 343.647
+mean energy = -391.955
+variance energy = 0.173014
+the final averaged energy is -391.383
+REPORT:
+	temperature: 1750
+	seed: 1234
+	warmup iterations: 0
+	skip iterations: 1000
+	measure iterations: 100
+	lattice dimensions: 1152 x 468 x 468
+	linked cell: 4 x 4 x 4
+	warmup/skip updates elapsed time: 26230.1 sec
+	warmup/skip updates per ns: 0.0384773
+	measure updates elapsed time: 2610.71 sec
+	measure updates per ns: 0.0386585
+	average energy: -391.955
+	cv: 10586.6
+Writing lattice to out2025-3-25-7:59/lattice-T_all1750-7.dat
+Writing energyto out2025-3-25-7:59/energy-T_all1750-7.dat
+======================================
+The temperature T = 1500
+======================================
+Starting skip iterations...
+Completed 0 / 1000 skip iterations...
+the initial averaged energy is -400.001 meV
+Starting measure iterations...
+Completed 0 / 100 measure iterations...  energy_ave: -400.013
+MPI cost time = 513.974
+mean energy = -400.617
+variance energy = 0.122979
+the final averaged energy is -400.104
+REPORT:
+	temperature: 1500
+	seed: 1234
+	warmup iterations: 0
+	skip iterations: 1000
+	measure iterations: 100
+	lattice dimensions: 1152 x 468 x 468
+	linked cell: 4 x 4 x 4
+	warmup/skip updates elapsed time: 25431.8 sec
+	warmup/skip updates per ns: 0.039685
+	measure updates elapsed time: 2537.27 sec
+	measure updates per ns: 0.0397776
+	average energy: -400.617
+	cv: 10242.3
+Writing lattice to out2025-3-25-7:59/lattice-T_all1500-7.dat
+Writing energyto out2025-3-25-7:59/energy-T_all1500-7.dat
+======================================
+The temperature T = 1250
+======================================
+Starting skip iterations...
+Completed 0 / 1000 skip iterations...
+the initial averaged energy is -407.666 meV
+Starting measure iterations...
+Completed 0 / 100 measure iterations...  energy_ave: -407.677
+MPI cost time = 701.49
+mean energy = -408.197
+variance energy = 0.0918351
+the final averaged energy is -407.732
+REPORT:
+	temperature: 1250
+	seed: 1234
+	warmup iterations: 0
+	skip iterations: 1000
+	measure iterations: 100
+	lattice dimensions: 1152 x 468 x 468
+	linked cell: 4 x 4 x 4
+	warmup/skip updates elapsed time: 24657.6 sec
+	warmup/skip updates per ns: 0.0409311
+	measure updates elapsed time: 2463.61 sec
+	measure updates per ns: 0.0409668
+	average energy: -408.197
+	cv: 11013.9
+Writing lattice to out2025-3-25-7:59/lattice-T_all1250-7.dat
+Writing energyto out2025-3-25-7:59/energy-T_all1250-7.dat
+======================================
+The temperature T = 1000
+======================================
+Starting skip iterations...
+Writing lattice to out2025-3-25-7:59/lattice-T_all1000-7_0.dat
+Completed 0 / 10000 skip iterations...
+Writing lattice to out2025-3-25-7:59/lattice-T_all1000-7_1000.dat
+Writing lattice to out2025-3-25-7:59/lattice-T_all1000-7_2000.dat
+Writing lattice to out2025-3-25-7:59/lattice-T_all1000-7_3000.dat
+Writing lattice to out2025-3-25-7:59/lattice-T_all1000-7_4000.dat
+Writing lattice to out2025-3-25-7:59/lattice-T_all1000-7_5000.dat
+Writing lattice to out2025-3-25-7:59/lattice-T_all1000-7_6000.dat
+Writing lattice to out2025-3-25-7:59/lattice-T_all1000-7_7000.dat
+Writing lattice to out2025-3-25-7:59/lattice-T_all1000-7_8000.dat
+Writing lattice to out2025-3-25-7:59/lattice-T_all1000-7_9000.dat
+the initial averaged energy is -415.862 meV
+Starting measure iterations...
+Completed 0 / 100 measure iterations...  energy_ave: -415.871
+MPI cost time = 2636.13
+mean energy = -416.271
+variance energy = 0.0546649
+the final averaged energy is -415.867
+REPORT:
+	temperature: 1000
+	seed: 1234
+	warmup iterations: 0
+	skip iterations: 10000
+	measure iterations: 100
+	lattice dimensions: 1152 x 468 x 468
+	linked cell: 4 x 4 x 4
+	warmup/skip updates elapsed time: 236593 sec
+	warmup/skip updates per ns: 0.0426581
+	measure updates elapsed time: 2364.31 sec
+	measure updates per ns: 0.0426874
+	average energy: -416.271
+	cv: 10243.8
+Writing lattice to out2025-3-25-7:59/lattice-T_all1000-7.dat
+Writing energyto out2025-3-25-7:59/energy-T_all1000-7.dat

@@ -50,6 +50,11 @@ Input:
 ```bash
    mpirun -n 8 -x UCX_LOG_LEVEL=error ./ising_basic_3d -x 500 -y 220 -z 220 -n 10000 -m 10 -a 2000 -i 850 -d 50 -o 1
 ```
+Output: See [output files A2](./log_table4_910B/) for details.
+    
+### A_3
+Input and Output: See the results at [Strong Scaling](log_strong_scaling.zip) and [Weak Scaling](log_weak_scaling.zip)
+
 #### Strong scaling:
 ```bash
    sbatch --gpus=1 ./run_para.sh
@@ -80,7 +85,6 @@ Input:
    #mpirun -np 16 -N 8  ./ising_basic_3d -x 60 -y 510 -z 525 -n 100 -m 1 -a 2000 -i 2000 -d 50 -o 1
    #mpirun -np 32 -N 8  ./ising_basic_3d -x 30 -y 510 -z 525 -n 100 -m 1 -a 2000 -i 2000 -d 50 -o 1
 ```
-Output: See [output files A2](./log_table4_910B/) for details.
 
 | Model | LinkCell | Total Atoms | 1 GPU time(efficiency) | 2 GPU time(efficiency) | 4 GPU time(efficiency) | 8 GPU time(efficiency) | 16 GPU time(efficiency) |
 | :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: |
@@ -92,6 +96,7 @@ Output: See [output files A2](./log_table4_910B/) for details.
 * 1~16 H800 GPUs
 * Model: EPI && MLIP
 * Total number of atoms: ~ 1B
+
 
 #### Exp. 3: weak scaling
 * Input:
@@ -157,7 +162,4 @@ mpirun -n 1 ./ising_basic_3d -x 960 -y 510 -z 525 -n 100 -m 1 -a 2000 -i 2000 -d
 - ML table4 NPU 910B `log_table4_910B`
   - TP `8*1152*468*468*4/(1302.93/10)=6.20*10^7`
   - TP per chip `1152*468*468*4/(1302.93/10)=7.75*10^6`
-    
-### A_3
-Input and Output: See the results at [Strong Scaling](log_strong_scaling.zip) and [Weak Scaling](log_weak_scaling.zip)
 

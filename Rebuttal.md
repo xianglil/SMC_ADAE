@@ -54,27 +54,31 @@ Fig. 4 presents a schematic of the energy calculation function in SMC-NPU, based
 #### Ghost Layers
 Another key difference between SMC-NPU and SMC-GPU is on handling the boundary condition in a lattice. On NPU, the atomic virtual layer is used to handle atomic exchanges at periodic boundaries. Periodic boundaries are a technique used to simulate infinitely periodic systems. On GPUs, the atomic virtual layer is not necessary, as GPUs can determine whether the atom being exchanged with a red atom lies on the opposite side of the block and directly read data from that side. However, due to the SIMD (Single Instruction, Multiple Data) architecture of Ascend processors, such conditional checks cannot be implemented efficiently. Therefore, an atomic virtual layer must be introduced, even for the case that the whole lattice supercell is on a single accelerator, and it must be updated after each atomic exchange to ensure **data continuity** during computation. 
 
-#### Performance Analysis
-Its obvious that the above steps involves many vector operations. The total number of operations in a MC sweep is approximately proportional to $N*L_{LC}*N_{NN}$, where $N$ is the number of atoms in the lattice, $L_{LC}$ is the length of the link cell. Similarly, for the reduce operation of the local energies to obtain block_energy, the total number of operation in a MC sweep is approximately $N*N_{LIZ}$, where $N_{LIZ}$ is the size of the local interaction zone.
+#### Performance Analysis Based on Arithmetic Intensity
+To understand the potential bottleneck, here we make an performance analysis, based on the arithemtic intensity of the key kernels in the code.
+For NPU:
+* FLOPS from Local energy calculations: For a MC sweep, the total number of FLOPS is approximately: 
+  $N\times N_{LC}\times N_{LCE}\times A$, where
+    * $N$: The number of atoms in the lattice, e.g., 1 billion.
+    * $N_{LC}$: Linkc-cell size, e.g. $4*4*4*2=128$.
+    * $N_{LCE}$: The local chemical environment. e.g. all sites up to 2nd NN. 
+    * A: A prafactor due to the energy model. For the qSRO model, A is in the order of 1. In more complicated model, such as when matrix multiplication involves, A can be much larger, and in that case, the cube core should be utilized.
+* Memory access: For a MC sweep, the theoretical total number of message, disregard practical complications such caching, DRAM burst, is approximately: $N\times N_{LC}\times N_{LCE}\times B\times2$, where B is the overhead due to size match, and can be assume to be 1. and the 2 is the due to the use of `INT16` for elements, which takes two bytes.
 
-$N*N_{LC}*N_{NN}*L_{LC}$ bit-wise operations
+Therefore, the arithmetic intensity $FLOPS/Memory\_bytes\_transfered \approx 0.5$. Considering that the vector units in NPU and GPU are designed with AI at the order of 10, it can be seen that the MC code on a single NPU or GPU, is memory bandwidth bounded.
 
-Step 2: Swap
-1. Swap;
-1. Delta E;
-2. Elements on lattice;
-3. Write operation combine two lattice 
+As for communication, a discussion has been given in the manuscript. Actual measurement also show that communication is not the bottleneck, for the qSRO model, although this is no longer true for the simple EPI model.
 
-Diff
-1. INT 16 vs INT8
-2. Red vs Green;
-3. EPI calculation, mask selection, index taken;
+Similar discussion applies for SMC-GPU.
 
-###### Energy Computing: cal_energy()
-$N*N_{LC}*N_{LIZ}$
-
-* In the SMC-NPU algorithm, the amount of data movement necessary due to the need to calculate the local energy for every sites in every mini-sweep. While in SMC-GPU, only 
+To wrap up: 
+* For qSRO model, both SMC-GPU and SMC-NPU are memory-bandwidth bounded.
+* For EPI model, large-scale calculation across multiple nodes can be communication bounded.
+* For more more involved energy form that involves heavy matrix multiplication, SMC-X moves from memory nandwidth bounded to computing bounded, as the matrix multiplication operation increases.
 
 #### Results of Distributed SMC-NPU
+We implemented a distributed version of SMC-NPU, and the performance evaluation are present in the ADAE repository, along with the GPU results, at https://github.com/xianglil/SMC_ADAE/blob/main/README.md
 
+
+The strong and weak scaling of SMC-NPU, using the qSRO model, is shown below. It can be seen that both the strong and weak scaling efficiency are close to ideal. The only exception is the strong scaling at 16 NPUs, which is 72%. This is due to: 1) the lower network bandwidth across node compared to internode. 2) probabaly more importantly, the reduced lattice size per NPU gives lower parallel degree, which makes hard to efficiently harness to computing power in the large number of 2048-bit vector cores.
 ![alt text](image-10.png)

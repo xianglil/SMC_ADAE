@@ -15,7 +15,7 @@ In SMC-GPU, only one lattice are used, and all swap trials are attempted on-site
 To coalescing the memory access, the SMC-NPU algorithm uses **two lattices** to record the atomic configuratoins before and after the swap trials, respectively, as shown in Fig. 6 of the manuscript. Note that the usage of of two lattices enables the **decoupling of the two important steps: energy calculation, and Metropolis updating**, as illustrated in Fig. 5. As a result, the most computing-intensive step, the calculation of the local energies for each sites, can be done in an **embarassively-parallel way, with contigious memory access**. While some overhead still exists due to the need to padding the neighbor vectors for the hardware's SIMD width, the contigious memory access pattern, as well as the huge parallel degrees introduced by SMC-NPU, can effectively utilize the large number (~40) of 2048-bit SIMD vector units in an NPU. Note that the lattice are stored as `INT16`, therefere a total of $128\times40=5120$ sites can be processed simultaneously in a clock cycle by a single  **TBD with Kai**. 
 ![alt text](image-2.png)
 We highlight that, unlike the NPU-specific masked-operation technique to be discussed below, the above optimization technique in principle can be applied to any vector-based accelerators, in additional to NPUs, to convert irregular memory access in atomistic simulation to regular ones, at the cost of doubling the memory usage for storing the lattice.
-#### Vectorization via Masked Operations
+#### 3. Vectorization via Masked Operations
 The vector processing unit supports a select operation, which performs an element-wise selection between two source operand vectors and stores the result in a destination vector. The selection is mask-controlled:
 ![alt text](image-3.png)
 * When a mask bit is 1, the corresponding element is taken from the first source operand vector.
@@ -30,7 +30,7 @@ As mentioned, due to the limit of the programming model in NPU, the conditional 
 ![alt text](image-7.png), which represents that the site labeled as 1 need to swap with the 0-th neighbor (well, zero-th neighor sounds a little strange, but I suppose the readers understood what I meant).
 5. Use the $N_{NN}$ masks $m_3^i$ to construct the swaped lattice vectors.
 
-#### 3. Unified Buffer and Latency Hiding
+#### 4. Unified Buffer and Latency Hiding
 Another key difference between GPU and NPU is that there is no complete cache hierachy in NPU. Specifically, from Fig. 3, it can be seen that there are global memory and L2 Cache, but no L1 Cache, as would be for the SMs of a GPU. As a result, data movement must be manually tailored to overcoming the gloabl HBM memory bandwidth wall, which is the potential bottleneck of the MC simulation, for both the EPI model and the qSRO model.
 
 As will be discussed in the performance analysis section, the most computing-intensive part is the **calculation of the local energies $E_0$** . As illustrated in Fig. 1, to calculated $E_0$.
@@ -51,10 +51,10 @@ Fig. 4 presents a schematic of the energy calculation function in SMC-NPU, based
 ![alt text](image-11.png)
 
 
-#### Ghost Layers
+#### 5. Ghost Layers
 Another key difference between SMC-NPU and SMC-GPU is on handling the boundary condition in a lattice. On NPU, the atomic virtual layer is used to handle atomic exchanges at periodic boundaries. Periodic boundaries are a technique used to simulate infinitely periodic systems. On GPUs, the atomic virtual layer is not necessary, as GPUs can determine whether the atom being exchanged with a red atom lies on the opposite side of the block and directly read data from that side. However, due to the SIMD (Single Instruction, Multiple Data) architecture of Ascend processors, such conditional checks cannot be implemented efficiently. Therefore, an atomic virtual layer must be introduced, even for the case that the whole lattice supercell is on a single accelerator, and it must be updated after each atomic exchange to ensure **data continuity** during computation. 
 
-#### Performance Analysis Based on Arithmetic Intensity
+#### 6. Performance Analysis Based on Arithmetic Intensity
 To understand the potential bottleneck, here we make an performance analysis, based on the arithemtic intensity of the key kernels in the code.
 For NPU:
 * FLOPS from Local energy calculations: For a MC sweep, the total number of FLOPS is approximately: 
@@ -76,7 +76,7 @@ To wrap up:
 * For EPI model, large-scale calculation across multiple nodes can be communication bounded.
 * For more more involved energy form that involves heavy matrix multiplication, SMC-X moves from memory nandwidth bounded to computing bounded, as the matrix multiplication operation increases.
 
-#### Results of Distributed SMC-NPU
+#### 7. Results of Distributed SMC-NPU
 We implemented a distributed version of SMC-NPU, and the performance evaluation are present in the ADAE repository, along with the GPU results, at https://github.com/xianglil/SMC_ADAE/blob/main/README.md
 
 

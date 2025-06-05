@@ -1,0 +1,84 @@
+======================================
+The temperature T = 1850
+======================================
+Starting skip iterations...
+Completed 0 / 10000 skip iterations...
+the initial averaged energy is -391.262 meV
+Starting measure iterations...
+Completed 0 / 10 measure iterations...  energy_ave: -391.259
+update ghost cost time = 0
+mean energy = -391.269
+variance energy = 1.73612e-05
+the final averaged energy is -391.276
+REPORT:
+	temperature: 1850
+	seed: 1234
+	warmup iterations: 0
+	skip iterations: 10000
+	measure iterations: 10
+	lattice dimensions: 500 x 220 x 220
+	linked cell: 4 x 4 x 4
+	warmup/skip updates elapsed time: 106970 sec
+	warmup/skip updates per ns: 0.00904926
+	measure updates elapsed time: 118.938 sec
+	measure updates per ns: 0.00813872
+	average energy: -391.269
+	cv: 0.00569821
+Writing lattice to out2025-4-3-16:26/lattice-T_all1850.dat
+Writing energy to out2025-4-3-16:26/energy-T1850.dat
+======================================
+The temperature T = 1450
+======================================
+Starting skip iterations...
+Completed 0 / 10000 skip iterations...
+the initial averaged energy is -405.416 meV
+Starting measure iterations...
+Completed 0 / 10 measure iterations...  energy_ave: -405.418
+update ghost cost time = 0
+mean energy = -405.423
+variance energy = 7.22469e-06
+the final averaged energy is -405.424
+REPORT:
+	temperature: 1450
+	seed: 1234
+	warmup iterations: 0
+	skip iterations: 10000
+	measure iterations: 10
+	lattice dimensions: 500 x 220 x 220
+	linked cell: 4 x 4 x 4
+	warmup/skip updates elapsed time: 106970 sec
+	warmup/skip updates per ns: 0.00904929
+	measure updates elapsed time: 118.935 sec
+	measure updates per ns: 0.00813893
+	average energy: -405.423
+	cv: 0.00385999
+Writing lattice to out2025-4-3-16:26/lattice-T_all1450.dat
+Writing energy to out2025-4-3-16:26/energy-T1450.dat
+======================================
+The temperature T = 1050
+======================================
+Starting skip iterations...
+Completed 0 / 10000 skip iterations...
+the initial averaged energy is -416.861 meV
+Starting measure iterations...
+Completed 0 / 10 measure iterations...  energy_ave: -416.859
+update ghost cost time = 0
+mean energy = -416.86
+variance energy = 5.65839e-06
+the final averaged energy is -416.856
+REPORT:
+	temperature: 1050
+	seed: 1234
+	warmup iterations: 0
+	skip iterations: 10000
+	measure iterations: 10
+	lattice dimensions: 500 x 220 x 220
+	linked cell: 4 x 4 x 4
+	warmup/skip updates elapsed time: 106970 sec
+	warmup/skip updates per ns: 0.00904929
+	measure updates elapsed time: 118.931 sec
+	measure updates per ns: 0.0081392
+	average energy: -416.86
+	cv: 0.00576523
+Writing lattice to out2025-4-3-16:26/lattice-T_all1050.dat
+Writing energy to out2025-4-3-16:26/energy-T1050.dat

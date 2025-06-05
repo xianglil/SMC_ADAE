@@ -1,0 +1,25 @@
+======================================
+The temperature T = 2000
+======================================
+Starting skip iterations...
+Completed 0 / 10 skip iterations...
+the initial averaged energy is -371.38 meV
+Starting measure iterations...
+update ghost cost time = 0
+mean energy = nan
+variance energy = nan
+the final averaged energy is -371.38
+REPORT:
+	temperature: 2000
+	seed: 1234
+	warmup iterations: 0
+	skip iterations: 10
+	measure iterations: 0
+	lattice dimensions: 1152 x 468 x 468
+	linked cell: 4 x 4 x 4
+	warmup/skip updates elapsed time: 1052.84 sec
+	warmup/skip updates per ns: 0.00958609
+	measure updates elapsed time: 1.8e-05 sec
+	measure updates per ns: 0
+	average energy: nan
+	cv: nan

@@ -165,3 +165,36 @@ mpirun -n 1 ./ising_basic_3d -x 960 -y 510 -z 525 -n 100 -m 1 -a 2000 -i 2000 -d
   - TP `8*1152*468*468*4/(1302.93/10)=6.20*10^7`
   - TP per chip `1152*468*468*4/(1302.93/10)=7.75*10^6`
 
+## NPU weak_scaling
+* Input:
+```run.sh
+mpirun --allow-run-as-root -n 1 -x UCX_LOG_LEVEL=error ./ising_basic_3d -x 1152 -y 468 -z 468 -n 10 -m 0 -a 2000 -i 2000 -d 500 -o 1
+mpirun --allow-run-as-root -n 2 -x UCX_LOG_LEVEL=error ./ising_basic_3d -x 1152 -y 468 -z 468 -n 10 -m 0 -a 2000 -i 2000 -d 500 -o 1
+mpirun --allow-run-as-root -n 4 -x UCX_LOG_LEVEL=error ./ising_basic_3d -x 1152 -y 468 -z 468 -n 10 -m 0 -a 2000 -i 2000 -d 500 -o 1
+mpirun --allow-run-as-root -n 8 -x UCX_LOG_LEVEL=error ./ising_basic_3d -x 1152 -y 468 -z 468 -n 10 -m 0 -a 2000 -i 2000 -d 500 -o 1
+mpirun --allow-run-as-root --hostfile hostfile -np 16 -N 8 -mca btl ^openib -x UCX_NET_DEVICES=roceo1:1,roceo5:1 -x HCCL_SOCKET_IFNAME=eno,enp --bind-to l3cache --report-bindings -x HCCL_WHITELIST_DISABLE -x UCX_LOG_LEVEL=error \
+-x LD_LIBRARY_PATH ./ising_basic_3d -x 1152 -y 468 -z 468 -n 10 -m 0 -a 2000 -i 2000 -d 500 -o 1
+```
+
+* [Output files](./log_NPU2/log_weak_scaling/)
+
+| Model | LinkCell | Atoms Per GPU | 1 GPU time(efficiency) | 2 GPU time(efficiency) | 4 GPU time(efficiency) | 8 GPU time(efficiency) | 16 GPU time(efficiency) |
+| :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: |
+| ML | 4x4x4 | 1B | 105.046s(1.0) | 105.104s(0.999) | 105.126s(0.999) | 105.284s(0.998) | 105.315s(0.997) |
+
+## NPU strong_scaling
+* Input:
+```run.sh
+mpirun --allow-run-as-root -n 1 -x UCX_LOG_LEVEL=error ./ising_basic_3d -x 1152 -y 468 -z 468 -n 10 -m 0 -a 2000 -i 2000 -d 500 -o 1
+mpirun --allow-run-as-root -n 2 -x UCX_LOG_LEVEL=error ./ising_basic_3d -x 576 -y 468 -z 468 -n 10 -m 0 -a 2000 -i 2000 -d 500 -o 1
+mpirun --allow-run-as-root -n 4 -x UCX_LOG_LEVEL=error ./ising_basic_3d -x 288 -y 468 -z 468 -n 10 -m 0 -a 2000 -i 2000 -d 500 -o 1
+mpirun --allow-run-as-root -n 8 -x UCX_LOG_LEVEL=error ./ising_basic_3d -x 144 -y 468 -z 468 -n 10 -m 0 -a 2000 -i 2000 -d 500 -o 1
+mpirun --allow-run-as-root --hostfile hostfile -np 16 -N 8 -mca btl ^openib -x UCX_NET_DEVICES=roceo1:1,roceo5:1 -x HCCL_SOCKET_IFNAME=eno,enp --bind-to l3cache --report-bindings -x HCCL_WHITELIST_DISABLE -x UCX_LOG_LEVEL=error \
+-x LD_LIBRARY_PATH ./ising_basic_3d -x 72 -y 468 -z 468 -n 10 -m 0 -a 2000 -i 2000 -d 500 -o 1
+```
+
+* [Output files](./log_NPU2/log_strong_scaling/)
+
+| Model | LinkCell | Total Atoms | 1 GPU time(efficiency) | 2 GPU time(efficiency) | 4 GPU time(efficiency) | 8 GPU time(efficiency) | 16 GPU time(efficiency) |
+| :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: |
+| ML | 4x4x4 | 1B | 105.046s(1.0) | 52.6508s(0.998) | 26.7411s(0.982) | 13.4414s(0.977) | 9.11252s(0.720) |
